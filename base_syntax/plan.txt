@@ -1,0 +1,12 @@
+- пакеты
+- как организовать проект
+- ошибки
+- все микропаттерны каналов
+- задачи на concurrency
+- синхронизация горутин через err group
+- сборка мусора (garbage collector)
+- аллокатор
+- как работает компилятор
+
+
+https://www.figma.com/board/wggq517IfGNDpw63hLvSGa/Go-Roadmap-2025-0--%3E-Middle?node-id=0-1&p=f
