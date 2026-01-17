@@ -23,6 +23,10 @@ func uniquePathsWithObstacles(obstacleGrid [][]int) int {
 			dp[i][j] = dp[i-1][j] + dp[i][j-1]
 		}
 	}
+	/*
+		в результате каждая клетка - количество путей к ней, на местах камней будет 0.
+		(то же самое, что в 62 задаче)
+	*/
 	return dp[m][n]
 }
 
