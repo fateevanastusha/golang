@@ -27,7 +27,11 @@ func getRestNums(all, curr []int) []int {
 	return res
 }
 
-// time - O(n**n), mem - O(n*n**n)
+// time - O(!n), mem - O(!n) так как без повторений
+// количество комбинаций - это факториал в данном случае (5*4*3*2*1=120)
+/*
+	такая же как 17! только тут надо брать значения, которые мы еще не использовали
+*/
 func permute(nums []int) [][]int {
 	var res [][]int
 	if len(nums) == 0 {
@@ -36,16 +40,14 @@ func permute(nums []int) [][]int {
 	var rec func(idx int, curr []int)
 
 	rec = func(idx int, curr []int) {
-		//чтобы не мутировал
 		if idx == len(nums) {
+			//чтобы не мутировал
 			tmp := make([]int, len(curr))
 			copy(tmp, curr)
 			res = append(res, tmp)
 			return
 		}
-		rest := getRestNums(nums, curr)
-
-		for _, num := range rest {
+		for _, num := range getRestNums(nums, curr) {
 			addNum(&curr, num)
 			rec(idx+1, curr)
 			Pop(&curr)
