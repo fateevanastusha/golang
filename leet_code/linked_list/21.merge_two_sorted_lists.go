@@ -19,6 +19,10 @@ func getVal(node *ListNode) int {
 
 // 0 ms
 func mergeTwoLists(l1, l2 *ListNode) *ListNode {
+	/*
+		два указателя - на первый и второй список. берем наименьшее значение, пушим, двигаем указатель у того,
+		что взяли.
+	*/
 	dummy := &ListNode{}
 	tail := dummy
 	for l1 != nil || l2 != nil {

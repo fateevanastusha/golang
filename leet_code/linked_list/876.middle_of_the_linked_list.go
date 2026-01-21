@@ -10,6 +10,26 @@ type ListNode struct {
 // time: 0(n), mem: 0(1)
 func middleNode(head *ListNode) *ListNode {
 
+	/*
+		есть быстрый и медленный указатель - быстрый шагает через 2 шага, медленный - через 1
+		↓
+		1 > 2 > 3 > 4 > 5 > 6 > nil
+		↑
+
+		    ↓
+		1 > 2 > 3 > 4 > 5 > 6 > nil
+		        ↑
+
+		        ↓
+		1 > 2 > 3 > 4 > 5 > 6 > nil
+		                ↑
+
+		            ↓
+		1 > 2 > 3 > 4 > 5 > 6 > nil
+		                         ↑
+
+		как только быстрый достигает конца, медленный как раз на середине.
+	*/
 	fast, slow := head, head
 	for fast != nil && fast.Next != nil {
 		fast = fast.Next.Next

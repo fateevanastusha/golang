@@ -7,6 +7,10 @@ type ListNode struct {
 	Next *ListNode
 }
 
+/*
+если зациклен - то указатели будут бегать по кругу, пока не встретятся. если не зациклен - то быстрый указатель
+упрется и цикл остановится, вернется false.
+*/
 func hasCycle(head *ListNode) bool {
 	slow, fast := head, head
 	for fast.Next != nil && fast != nil {

@@ -11,6 +11,11 @@ type ListNode struct {
 
 func reverseList(head *ListNode) *ListNode {
 
+	/*
+		null < 1 < 2 < 3 < 4
+
+		меняет направление
+	*/
 	var prev *ListNode
 	curr := head
 	for curr != nil {

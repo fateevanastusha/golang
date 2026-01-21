@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math"
 )
 
 type ListNode struct {
@@ -22,11 +23,12 @@ func clear(lists []*ListNode) []*ListNode {
 }
 
 func find(lists []*ListNode) int {
-	res := 100000000
+	//ищет индекс наименьшей
+	minValue := math.MaxInt
 	k := 0
 	for i, v := range lists {
-		if v != nil && v.Val < res {
-			res = v.Val
+		if v != nil && v.Val < minValue {
+			minValue = v.Val
 			k = i
 		}
 	}
@@ -39,10 +41,13 @@ func mergeKLists(lists []*ListNode) *ListNode {
 	tail := dummy
 
 	for {
+		//на каждрй итерации цикла находим наименьшую ноду и добавляем ее
+		//удаляет nil-значения
 		lists = clear(lists)
 		if len(lists) == 0 {
 			break
 		}
+		//находим индекс ноды с наименьшим значением
 		point := find(lists)
 
 		tail.Next = lists[point]

@@ -22,6 +22,7 @@ type ListNode struct {
 func getIntersectionNode(headA, headB *ListNode) *ListNode {
 	p1, p2 := headA, headB
 
+	// ходим пока не пересечемся!
 	for p1 != p2 {
 		if p1 != nil {
 			p1 = p1.Next

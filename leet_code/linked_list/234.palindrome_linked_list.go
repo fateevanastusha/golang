@@ -10,10 +10,19 @@ type ListNode struct {
 // time: O(n), mem: 0(n)
 func isPalindrome(head *ListNode) bool {
 
+	/*
+		1 > 2 > 2 > 1 - true
+		1 > 2 > 3 > 4 > 4 > 3 > 2 > 1 - true
+
+
+	*/
 	if head == nil || head.Next == nil {
 		return true
 	}
 
+	//сначала через fast/slow pointers находим середину
+	//1 > 2 > 3 > 4 > 4 > 3 > 2 > 1
+	//4 > 3 > 2 > 1 - середина
 	// s - mid
 	s, f := head, head
 	for f != nil && f.Next != nil {
@@ -21,10 +30,15 @@ func isPalindrome(head *ListNode) bool {
 		f = f.Next.Next
 	}
 
+	//dummy node для середины
 	swappedMid := &ListNode{
 		Val:  s.Val,
 		Next: nil,
 	}
+
+	//разворачиваем вторую половину
+	//4 > 3 > 2 > 1
+	//1 > 2 > 3 > 4
 
 	curr := s.Next
 	for curr != nil {
@@ -35,6 +49,8 @@ func isPalindrome(head *ListNode) bool {
 		curr = curr.Next
 	}
 
+	//два указателя, один с начала, другой с РАЗВЕРНУТОЙ середины
+	//если ноды не равны - значит не палиндром
 	a, b := head, swappedMid
 	for b != nil {
 		if b.Val != a.Val {
