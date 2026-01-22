@@ -4,6 +4,10 @@ import "fmt"
 
 func isMonotonic(nums []int) bool {
 
+	/*
+		если массив не монотонный (то есть где-то есть ошибка), то в итоге asc и desc оба будут false!
+		если один из них остался true, то массив никогда не убывал или никогда не возрастал
+	*/
 	//time: O(n), mem: O(1)
 	asc := true
 	desc := true

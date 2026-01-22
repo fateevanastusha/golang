@@ -5,6 +5,7 @@ import (
 )
 
 // time: O(n), mem: O(1)
+// префиксный массив
 func pivotIndex(nums []int) int {
 
 	sum := 0
@@ -15,6 +16,7 @@ func pivotIndex(nums []int) int {
 	prefixSum := 0
 	for i := 0; i < len(nums); i++ {
 		v := nums[i]
+		//слева равно права - префиксная сумма равна общей (общая-текущее значение-префиксная сумма)
 		if sum-prefixSum-v == prefixSum {
 			return i
 		}

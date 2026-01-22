@@ -21,10 +21,14 @@ func rotate(nums []int, k int) {
 	// copy(nums, append(nums[last-n:], nums[0:last-n]...))
 
 	//time: O(n), mem: O(1)
+	//1 2 3 4 5 6 7,  k = 3
 	l := len(nums)
 	n := k % l
+	//> 7 6 5 4 3 2 1
 	rotateSubArray(nums, 0, l)
+	//> 5 6 7 4 3 2 1
 	rotateSubArray(nums, 0, n)
+	//> 5 6 7 1 2 3 4
 	rotateSubArray(nums, n, l)
 
 }

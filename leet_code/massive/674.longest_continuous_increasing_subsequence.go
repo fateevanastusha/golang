@@ -11,9 +11,11 @@ func findLengthOfLCIS(nums []int) int {
 	nums = append(nums, math.MaxInt)
 	for i, curr := range nums[:len(nums)-1] {
 		var next = nums[i+1]
+		//если возрастает - поднимаем текущую длину
 		if next > curr {
 			currL++
 		} else {
+			//наткнулись на перегиб. обнуляем текущую длину, выставляем максимальную
 			if currL+1 > maxL {
 				maxL = currL + 1
 			}

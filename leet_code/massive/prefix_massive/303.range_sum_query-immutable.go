@@ -9,6 +9,7 @@ type NumArray struct {
 // time: 0(n), mem: O(n)
 func Constructor(nums []int) NumArray {
 
+	//префиксный массив
 	p := []int{0}
 	for i, v := range nums {
 		p = append(p, v+p[i])
