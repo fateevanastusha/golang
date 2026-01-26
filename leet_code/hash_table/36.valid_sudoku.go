@@ -3,13 +3,18 @@ package main
 import "fmt"
 
 // time - O(n), mem - O(n)
+/*
+	нужно чтобы в том же ряду, строке и квадрате ничего не было
+*/
 func isValidSudoku(board [][]byte) bool {
 
+	//81 клетка всего, все их проходим
 	for r := 0; r < 9; r++ {
 		seenRow := map[byte]bool{}
 		seenCol := map[byte]bool{}
 		seenSqr := map[byte]bool{}
 
+		//9 элементов в квадрате, строке и столбце
 		for i := 0; i < 9; i++ {
 			//check row
 			rowV := board[r][i]

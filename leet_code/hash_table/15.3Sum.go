@@ -11,16 +11,20 @@ func threeSum(nums []int) [][]int {
 	res := [][]int{}
 	sort.Ints(nums)
 
+	//берем число и для него перебираем два остальных
 	for i, x := range nums[:len(nums)-2] {
+		//пропускаем дубликаты
 		if i > 0 && x == nums[i-1] {
 			continue
 		}
+		//классический способ найти сумму двух чисел
 		l, r := i+1, len(nums)-1
 		for l < r {
 			sum := nums[l] + nums[r] + x
 			if sum == 0 {
 				res = append(res, []int{x, nums[l], nums[r]})
 				l++
+				//пропускаем дубликаты
 				for l < r && nums[l] == nums[l-1] {
 					l++
 				}

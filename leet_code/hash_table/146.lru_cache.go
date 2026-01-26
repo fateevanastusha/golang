@@ -30,8 +30,11 @@ func newNode(key, val int) *Node {
 }
 
 type LRUCache struct {
-	capacity   int
-	values     map[int]*Node
+	//вместимость
+	capacity int
+	//значения со ссылкой на ноду, чтобы можно было из середины ее переместить куда-то
+	values map[int]*Node
+	//первая и последняя
 	head, tail *Node
 }
 
@@ -54,7 +57,9 @@ func Constructor(capacity int) LRUCache {
 // time - O(1)
 func (this *LRUCache) Get(key int) int {
 	if node, ok := this.values[key]; ok {
+		//удаляем из середины/конца
 		this.remove(node)
+		//добавляем в начало
 		this.insert(node)
 		return node.Value
 	}
@@ -71,10 +76,11 @@ func (this *LRUCache) Put(key int, value int) {
 		this.remove(v)
 	}
 	if len(this.values) == this.capacity {
-		//delete first
+		//удаляем самую старую
 		this.remove(this.tail.Prev)
 	}
 
+	//добавляем в начало
 	this.insert(newNode(key, value))
 
 }

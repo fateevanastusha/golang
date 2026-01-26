@@ -6,9 +6,9 @@ import (
 
 //time: O(n), mem: O(n)
 /*
-
 	присваиваем значение каждой букве. затем сравниваем значение у первой и второй, они
 	должны быть равны.
+	пускай значения для буквы будут числа - длина мапы на данный момент. это удобно.
 */
 func isIsomorphic(s string, t string) bool {
 
@@ -21,14 +21,15 @@ func isIsomorphic(s string, t string) bool {
 	s1, t2 := []rune(s), []rune(t)
 	for i := 0; i < len(s1); i++ {
 		v1, v2 := s1[i], t2[i]
+		//присвоили значение
 		if _, ok := m1[v1]; !ok {
 			m1[v1] = len(m1) + 1
 		}
-
+		//присвоили значение
 		if _, ok := m2[v2]; !ok {
 			m2[v2] = len(m2) + 1
 		}
-
+		//сравнили
 		if m1[v1] != m2[v2] {
 			return false
 		}
