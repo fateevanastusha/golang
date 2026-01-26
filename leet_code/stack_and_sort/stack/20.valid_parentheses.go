@@ -28,16 +28,17 @@ func isValid(str string) bool {
 
 	for _, s := range []rune(str) {
 		if _, ok := v[s]; ok {
-			// s открывающая
+			// s открывающая, просто кладем в стэк
 			stack = append(stack, s)
 		} else {
-			// s закрывающая
+			// s закрывающая, если в стэке сверху не лежит для нее открывающей, то все плохо.
 			if len(stack) == 0 {
-				break
+				return false
 			}
+			//проверяем - последняя для нее ли и открывающая ли она?
 			last := Pop(&stack)
 			if v[last] != s {
-				break
+				return false
 			}
 		}
 	}

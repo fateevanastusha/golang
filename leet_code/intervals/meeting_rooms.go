@@ -51,12 +51,15 @@ func solve(intervals [][]int) int {
 			1 2 3 4 3 2 1 2 1 2 1 0
 			= максимальное - 4
 	*/
+
+	//расставляем точки
 	points := [][]int{}
 	for _, v := range intervals {
 		points = append(points, []int{v[0], 1})
 		points = append(points, []int{v[1], -1})
 	}
 
+	//сортируем по началу. если начало одинаковое - то ставим сначала -, затем +
 	sort.Slice(points, func(i int, j int) bool {
 		if points[i][0] == points[j][0] {
 			return points[i][1] < points[j][1]
@@ -64,6 +67,7 @@ func solve(intervals [][]int) int {
 		return points[i][0] < points[j][0]
 	})
 
+	//метод точек
 	curr, max := 0, 0
 	for _, point := range points {
 		curr += point[1]

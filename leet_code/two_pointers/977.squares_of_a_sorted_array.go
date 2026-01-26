@@ -7,9 +7,12 @@ import (
 // time - O(n), mem - O(n)
 func sortedSquares(nums []int) []int {
 	result := make([]int, len(nums))
+	//указатель куда ставим значение
 	i := len(nums) - 1
+	//левый и правый
 	l, r := 0, len(nums)-1
 	for r >= l {
+		//проверяем где больше - слева или справа. бОльшее значение ставим в результат, и указатель соответствующий двигаем
 		left, right := nums[l]*nums[l], nums[r]*nums[r]
 		if left > right {
 			result[i] = left

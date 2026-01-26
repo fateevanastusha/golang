@@ -25,18 +25,22 @@ func merge(intervals [][]int) [][]int {
 		return [][]int{}
 	}
 
+	//сортирует интервалы по НАЧАЛУ
 	sort.Slice(intervals, func(i, j int) bool {
 		return intervals[i][0] < intervals[j][0]
 	})
 
 	merged := [][]int{intervals[0]}
 	for _, curr := range intervals[1:] {
+		//берем последний
 		last := merged[len(merged)-1]
 		a1, b1, a2, b2 := curr[0], curr[1], last[0], last[1]
 
+		//если входит в последний - объединяем их
 		if max(a1, a2) <= min(b1, b2) {
 			merged[len(merged)-1][0], merged[len(merged)-1][1] = min(a1, a2), max(b1, b2)
 		} else {
+			//если не входит - добавляем еще один
 			merged = append(merged, curr)
 		}
 

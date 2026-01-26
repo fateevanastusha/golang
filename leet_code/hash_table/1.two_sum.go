@@ -4,9 +4,11 @@ import "fmt"
 
 // time: O(n), mem: O(n)
 func twoSum(nums []int, target int) []int {
+	//запоминаем те что видели
 	seen := make(map[int]int)
 	for i, n := range nums {
 		c := target - n
+		//смотрим есть ли нужное число для суммы
 		if idx, ok := seen[c]; ok {
 			return []int{idx, i}
 		}

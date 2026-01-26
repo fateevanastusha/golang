@@ -22,36 +22,34 @@ func minRemoveToMakeValid(str string) string {
 	}
 
 	r := []rune(str)
+	//в стэке храним не скобку, а индекс этой скобки. чтобы знать что потом удалять
 	stack := []int{}
 	result := []rune(str)
 	deleted := 0
 	for i, s := range r {
+		//пропускаем НЕскобки
 		if unicode.IsLetter(s) {
 			continue
 		}
-		//open
+		//открывающая скобка
 		if _, ok := v[s]; ok {
 			//push to stack
 			stack = append(stack, i)
 		} else {
-			//close
-			if len(stack) == 0 {
+			//закрывающая скобка
+			//в стэке нет открывающей вообще или последняя открывающая не для нее
+			if len(stack) == 0 || v[r[Pop(&stack)]] != s {
 				//delete
+				//удаляем этот символ, deleted нужна для gap (как указатель сколько мы удалили, чтобы не ошибиться в индексах)
 				result = slices.Delete(result, i-deleted, i-deleted+1)
 				deleted++
 
-			} else {
-				last := Pop(&stack)
-				if v[r[last]] != s {
-					//delete
-					result = slices.Delete(result, i-deleted, i-deleted+1)
-					deleted++
-
-				}
 			}
 
 		}
 	}
+
+	//удаляем все, что в стэке осталось (открывающие без пары)
 	if len(stack) != 0 {
 		for _, v := range stack {
 			result = slices.Delete(result, v-deleted, v-deleted+1)
@@ -60,57 +58,6 @@ func minRemoveToMakeValid(str string) string {
 	}
 
 	return string(result)
-	// stack := []int{}
-
-	// v := map[rune]rune{
-	// 	'[': ']',
-	// 	'(': ')',
-	// 	'{': '}',
-	// }
-
-	// r := []rune(s)
-	// res := []rune(s)
-	// deleted := 0
-	// for i, s := range r {
-	// 	//skip letters
-	// 	if unicode.IsLetter(s) {
-	// 		continue
-	// 	}
-
-	// 	if _, ok := v[s]; ok {
-	// 		//open
-	// 		stack = append(stack, i)
-	// 	} else {
-	// 		//close
-
-	// 		//no open for close
-	// 		if len(stack) == 0 {
-	// 			//delete this from string
-	// 			res = slices.Delete(res, i-deleted, i-deleted+1)
-	// 			deleted++
-	// 			continue
-	// 		}
-
-	// 		//last open not for this close
-	// 		last := Pop(&stack)
-	// 		if v[r[last]] != s {
-	// 			//delete this from string
-	// 			res = slices.Delete(res, i-deleted, i-deleted+1)
-	// 			deleted++
-	// 			continue
-	// 		}
-	// 	}
-
-	// }
-	// if len(stack) != 0 {
-	// 	for _, i := range stack {
-	// 		res = slices.Delete(res, i-deleted, i-deleted+1)
-	// 		deleted++
-	// 	}
-
-	// }
-
-	// return string(res)
 }
 
 func main() {

@@ -7,6 +7,12 @@ import (
 )
 
 // 0 ms
+/*
+	↓   ↓
+	asnsa
+
+	- смотрим равны ли значения слева и справа. если нет - выходим
+*/
 func isPalindrome(s string) bool {
 	str := []rune(s)
 	left, right := 0, len(str)-1

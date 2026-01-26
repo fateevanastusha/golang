@@ -13,6 +13,7 @@ func getValue(arr []int, i int) int {
 }
 
 // time - O(m+n), mem - O(1)
+// ГЛАВНЫЙ секрет - заполнить с конца!
 func merge(nums1 []int, m int, nums2 []int, n int) {
 	p1, p2 := m-1, n-1
 	for p1 >= 0 || p2 >= 0 {

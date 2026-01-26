@@ -2,6 +2,9 @@ package main
 
 import "fmt"
 
+/*
+	поиск по ответу. ищем валидный ответ.
+*/
 // time - O(logn), mem - O(1)
 func isPerfectSquare(num int) bool {
 	l, r := 1, num
@@ -19,5 +22,5 @@ func isPerfectSquare(num int) bool {
 }
 
 func main() {
-	fmt.Println(isPerfectSquare(1))
+	fmt.Println(isPerfectSquare(14))
 }

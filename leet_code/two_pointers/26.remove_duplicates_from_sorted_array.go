@@ -1,48 +1,33 @@
-// package main
-
-// import "fmt"
-
-// func removeDuplicates(nums []int) int {
-// 	if len(nums) == 0 {
-// 		return 0
-// 	}
-// 	write := 1
-// 	for read := 1; read < len(nums); read++ {
-// 		if nums[read] != nums[read-1] {
-// 			nums[write] = nums[read]
-// 			write++
-// 		}
-// 	}
-// 	return write
-// }
-
-// func main() {
-// 	arr := []int{1, 1, 2}
-// 	fmt.Println(removeDuplicates(arr))
-// }
-
 package main
 
 import "fmt"
 
+// time - O(n), mem - O(n)
 func removeDuplicates(nums []int) int {
-
-	if len(nums) == 0 {
-		return 0
+	if len(nums) <= 1 {
+		return len(nums)
 	}
-	write := 1
-	last := nums[0]
-	for r := 1; r <= len(nums)-1; r++ {
-		value := nums[r]
-		if value != last {
-			nums[write] = nums[r]
-			write++
+
+	p1, p2 := 1, 1
+
+	for p2 < len(nums) {
+		//на границе разных чисел
+		if nums[p2] != nums[p2-1] {
+			v := nums[p2]
+			//выставляем в write указатель текущее значение
+			nums[p1] = v
+			//двигаем write указатель
+			p1++
+			//пока указатель на том же числе - двигаем его
+			for p2 < len(nums) && nums[p2] == v {
+				p2++
+			}
+		} else {
+			p2++
 		}
-		last = nums[r]
-
 	}
 
-	return write
+	return p1
 }
 
 func main() {

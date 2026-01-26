@@ -8,6 +8,7 @@ func good(v, t int) bool {
 
 // time - O(logn), mem - O(1)
 func search(nums []int, t int) int {
+	//сдвиг в r, значит ответ в l
 	l, r := 0, len(nums)
 	for r-l > 1 {
 		m := (l + r) / 2

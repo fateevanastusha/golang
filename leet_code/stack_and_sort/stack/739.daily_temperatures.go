@@ -9,25 +9,35 @@ func Pop[T comparable](arr *[]T) T {
 	return element
 }
 
+// time - O(n), mem - O(1)
 func dailyTemperatures(temperatures []int) []int {
 
+	/*
+		стэк - это индексы температур, для которой еще не нашлось бОльшей температуры.
+		мы проходимся по значениям. если стэк не пуст - смотрим, больше ли текущее значение
+		последнего значения в стэке, снимаем его. (повторяем пока стэк не опустеет либо пока
+		последнее значение в нем не станет >= текущего).
+	*/
 	res := make([]int, len(temperatures))
 	stack := []int{0}
 	i := 1
 	for len(stack) != 0 {
+		//значения закончились, остались те, что без пары. им ставим 0
 		if i >= len(temperatures) {
 			stackLast := Pop(&stack)
 			res[stackLast] = 0
 		} else {
-			//get curr value
+			//текущее значение
 			curr := temperatures[i]
-			//get last of stack
+			//последнее из стэка
 			stackLast := stack[len(stack)-1]
+			//если текущее значение больше последнего из стэка
 			if curr > temperatures[stackLast] {
 				//снимаем со стека, пишем найденную пару
 				Pop(&stack)
 				res[stackLast] = i - stackLast
 			}
+			//либо мы опустошили стэк, либо последнее значение не меньше текущего. кладем текущее.
 			if len(stack) == 0 || curr <= temperatures[stackLast] {
 				stack = append(stack, i)
 				i++
